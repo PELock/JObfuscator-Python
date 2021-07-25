@@ -32,8 +32,6 @@ setuptools.setup(name='jobfuscator',
           "Development Status :: 5 - Production/Stable",
           "Topic :: Software Development :: Libraries :: Python Modules",
           "Topic :: Security",
-          "Topic :: Security :: Cryptography"
-          "Intended Audience :: Developers",
           "Natural Language :: English",
           "License :: OSI Approved :: Apache Software License",
           "Programming Language :: Python :: 3",

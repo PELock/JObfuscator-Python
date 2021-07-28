@@ -9,7 +9,7 @@
 # JObfuscator provides advanced Java source code parsing based on AST trees,
 # multiple advanced obfuscation strategies are available.
 #
-# Version      : JObfuscator v1.0
+# Version      : JObfuscator v1.01
 # Python       : Python v3
 # Dependencies : requests (https://pypi.python.org/pypi/requests/)
 # Author       : Bartosz Wójcik (support@pelock.com)
@@ -67,6 +67,11 @@ class JObfuscator(object):
     # @var bool encrypt strings using polymorphic encryption algorithms
     # 
     cryptStrings = True
+
+    #
+    # @var bool for each method, extract all possible integers from the code and store them in an array
+    #
+    intsToArrays = True
 
     # 
     # @var integer success
@@ -181,6 +186,8 @@ class JObfuscator(object):
             params_array["shuffle_methods"] = "1"
         if self.cryptStrings:
             params_array["crypt_strings"] = "1"
+        if self.intsToArrays:
+            params_array["ints_to_arrays"] = "1"
 
         #
         # check if compression is enabled

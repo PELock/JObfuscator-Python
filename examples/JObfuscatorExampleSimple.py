@@ -6,7 +6,7 @@
 #
 # In this example we will obfuscate sample source with default options.
 #
-# Version        : v1.0
+# Version        : v1.01
 # Language       : Python
 # Author         : Bartosz Wójcik
 # Web page       : https://www.pelock.com
@@ -75,7 +75,8 @@ class Ideone
     //  rename_methods = false,
     //  rename_variables = true,
     //  shuffle_methods = true,
-    //  mix_code_flow = true
+    //  mix_code_flow = true,
+    //  ints_to_arrays = true    
     // )
     public static void main(String[] args) {
 

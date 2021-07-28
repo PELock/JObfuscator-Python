@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(name='jobfuscator',
 
-    version='1.0.0',
+    version='1.0.1',
 
     description='JObfuscator is a source code obfuscator for the Java programming language. Obfuscate and protect your Java source code and algorithms from hacking, cracking, reverse engineering, decompilation, and technology theft. JObfuscator provides advanced Java source code parsing based on AST trees, multiple advanced obfuscation strategies are available.',
     long_description=long_description,

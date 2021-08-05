@@ -9,7 +9,7 @@
 # JObfuscator provides advanced Java source code parsing based on AST trees,
 # multiple advanced obfuscation strategies are available.
 #
-# Version      : JObfuscator v1.01
+# Version      : JObfuscator v1.04
 # Python       : Python v3
 # Dependencies : requests (https://pypi.python.org/pypi/requests/)
 # Author       : Bartosz Wójcik (support@pelock.com)
@@ -63,7 +63,12 @@ class JObfuscator(object):
     # 
     shuffleMethods = True
 
-    # 
+    #
+    # @var bool encrypt integers using more than 15 floating point math functions from the java.lang.math.* class
+    #
+    intsMathCrypt = True
+
+    #
     # @var bool encrypt strings using polymorphic encryption algorithms
     # 
     cryptStrings = True
@@ -72,6 +77,11 @@ class JObfuscator(object):
     # @var bool for each method, extract all possible integers from the code and store them in an array
     #
     intsToArrays = True
+
+    #
+    # @var bool for each method, extract all possible doubles from the code and store them in an array
+    #
+    dblsToArrays = True
 
     # 
     # @var integer success
@@ -117,7 +127,10 @@ class JObfuscator(object):
         self.renameVariables = enable_all_obfuscation_options
         self.renameMethods = enable_all_obfuscation_options
         self.shuffleMethods = enable_all_obfuscation_options
+        self.intsMathCrypt = enable_all_obfuscation_options
         self.cryptStrings = enable_all_obfuscation_options
+        self.intsToArrays = enable_all_obfuscation_options
+        self.dblsToArrays = enable_all_obfuscation_options
 
     def login(self):
         """Login to the service and get the information about the current license limits
@@ -184,10 +197,14 @@ class JObfuscator(object):
             params_array["rename_methods"] = "1"
         if self.shuffleMethods:
             params_array["shuffle_methods"] = "1"
+        if self.intsMathCrypt:
+            params_array["ints_math_crypt"] = "1"
         if self.cryptStrings:
             params_array["crypt_strings"] = "1"
         if self.intsToArrays:
             params_array["ints_to_arrays"] = "1"
+        if self.dblsToArrays:
+            params_array["dbls_to_arrays"] = "1"
 
         #
         # check if compression is enabled

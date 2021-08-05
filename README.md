@@ -97,13 +97,14 @@ class Ideone
     // use @Obfuscate annotation alone)
     //
     //@Obfuscate(
-    //  remove_comments = true,
+    //  ints_math_crypt = true,
     //  crypt_strings = true,
     //  rename_methods = false,
     //  rename_variables = true,
     //  shuffle_methods = true,
     //  mix_code_flow = true,
-    //  ints_to_arrays = true    
+    //  ints_to_arrays = true,
+    //  dbls_to_arrays = true
     // )
     public static void main(String[] args) {
 

@@ -46,11 +46,6 @@ myJObfuscator = JObfuscator("ABCD-ABCD-ABCD-ABCD")
 myJObfuscator.enableCompression = True
 
 #
-# strip comments during parsing (Web API flag; not controlled by @Obfuscate)
-#
-myJObfuscator.removeComments = True
-
-#
 # encrypt integers using java.lang.Math.* style transformations
 #
 myJObfuscator.intsMathCrypt = True

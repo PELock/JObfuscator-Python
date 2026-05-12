@@ -43,10 +43,7 @@ class JObfuscator(object):
     # 
     enableCompression = True
 
-    #
-    # @var bool strip comments during parsing (not controlled by @Obfuscate annotations)
-    #
-    removeComments = True
+    _remove_comments = False  # private; not sent to the Web API (server/engine default applies)
 
     #
     # @var bool encrypt integers using more than 15 floating point math functions from the java.lang.Math.* class
@@ -178,7 +175,6 @@ class JObfuscator(object):
         self._apiKey = api_key
         
         self.enableCompression = enable_all_obfuscation_options
-        self.removeComments = enable_all_obfuscation_options
         self.intsMathCrypt = enable_all_obfuscation_options
         self.dblsMathCrypt = enable_all_obfuscation_options
         self.cryptStrings = enable_all_obfuscation_options
@@ -255,8 +251,6 @@ class JObfuscator(object):
         #
         # obfuscation strategies (keys match JavaObfuscator CLI / Web API)
         #
-        if self.removeComments:
-            params_array["remove_comments"] = "1"
         if self.intsMathCrypt:
             params_array["ints_math_crypt"] = "1"
         if self.dblsMathCrypt:

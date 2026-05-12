@@ -61,6 +61,11 @@ myJObfuscator.dblsMathCrypt = True
 myJObfuscator.cryptStrings = True
 
 #
+# split string literals into nested .concat chains (before string encryption)
+#
+myJObfuscator.stringSplit = True
+
+#
 # rename method names to random string values
 #
 myJObfuscator.renameMethods = True
@@ -173,6 +178,7 @@ class Ideone
     //  ints_math_crypt = true,
     //  dbls_math_crypt = true,
     //  crypt_strings = true,
+    //  string_split = true,
     //  string_char_vault = true,
     //  rename_methods = false,
     //  rename_variables = true,

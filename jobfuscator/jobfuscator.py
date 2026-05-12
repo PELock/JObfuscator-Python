@@ -61,6 +61,11 @@ class JObfuscator(object):
     cryptStrings = True
 
     #
+    # @var bool split string literals into nested .concat chains (runs before string encryption when enabled)
+    #
+    stringSplit = True
+
+    #
     # @var bool rename method names to random string values
     #
     renameMethods = True
@@ -178,6 +183,7 @@ class JObfuscator(object):
         self.intsMathCrypt = enable_all_obfuscation_options
         self.dblsMathCrypt = enable_all_obfuscation_options
         self.cryptStrings = enable_all_obfuscation_options
+        self.stringSplit = enable_all_obfuscation_options
         self.renameMethods = enable_all_obfuscation_options
         self.renameVariables = enable_all_obfuscation_options
         self.shuffleMethods = enable_all_obfuscation_options
@@ -257,6 +263,8 @@ class JObfuscator(object):
             params_array["dbls_math_crypt"] = "1"
         if self.cryptStrings:
             params_array["crypt_strings"] = "1"
+        if self.stringSplit:
+            params_array["string_split"] = "1"
         if self.renameMethods:
             params_array["rename_methods"] = "1"
         if self.renameVariables:

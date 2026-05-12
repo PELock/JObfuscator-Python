@@ -9,7 +9,7 @@
 # JObfuscator provides advanced Java source code parsing based on AST trees,
 # multiple advanced obfuscation strategies are available.
 #
-# Version      : JObfuscator v1.04
+# Version      : Python SDK v1.0.5
 # Python       : Python v3
 # Dependencies : requests (https://pypi.python.org/pypi/requests/)
 # Author       : Bartosz Wójcik (support@pelock.com)
@@ -43,25 +43,10 @@ class JObfuscator(object):
     # 
     enableCompression = True
 
-    # 
-    # @var bool change linear code execution flow to non-linear version
-    # 
-    mixCodeFlow = True
-
-    # 
-    # @var bool rename variable names to random string values
-    # 
-    renameVariables = True
-
-    # 
-    # @var bool rename method names to random string values
-    # 
-    renameMethods = True
-
-    # 
-    # @var bool shuffle functions order in the output source
-    # 
-    shuffleMethods = True
+    #
+    # @var bool strip comments during parsing (not controlled by @Obfuscate annotations)
+    #
+    removeComments = True
 
     #
     # @var bool encrypt integers using more than 15 floating point math functions from the java.lang.Math.* class
@@ -69,9 +54,34 @@ class JObfuscator(object):
     intsMathCrypt = True
 
     #
+    # @var bool encrypt doubles using java.lang.Math.* style transformations
+    #
+    dblsMathCrypt = True
+
+    #
     # @var bool encrypt strings using polymorphic encryption algorithms
-    # 
+    #
     cryptStrings = True
+
+    #
+    # @var bool rename method names to random string values
+    #
+    renameMethods = True
+
+    #
+    # @var bool rename variable names to random string values
+    #
+    renameVariables = True
+
+    #
+    # @var bool shuffle functions order in the output source
+    #
+    shuffleMethods = True
+
+    #
+    # @var bool change linear code execution flow to non-linear version
+    #
+    mixCodeFlow = True
 
     #
     # @var bool for each method, extract all possible integers from the code and store them in an array
@@ -82,6 +92,51 @@ class JObfuscator(object):
     # @var bool for each method, extract all possible doubles from the code and store them in an array
     #
     dblsToArrays = True
+
+    #
+    # @var bool store string characters in vault-style structures
+    #
+    stringCharVault = True
+
+    #
+    # @var bool derive integer literals via double/math pipelines
+    #
+    intsFromDoubleMath = True
+
+    #
+    # @var bool insert opaque mixer chains
+    #
+    opaqueMixerChain = True
+
+    #
+    # @var bool rewrite boolean expressions into harder-to-read equivalents
+    #
+    complexifyBooleans = True
+
+    #
+    # @var bool inject try/finally noise blocks
+    #
+    tryFinallyNoise = True
+
+    #
+    # @var bool encrypt int array literals (array staging strategy)
+    #
+    arrayIntCrypt = True
+
+    #
+    # @var bool encrypt char array literals (array staging strategy)
+    #
+    arrayCharCrypt = True
+
+    #
+    # @var bool encrypt double array literals (array staging strategy)
+    #
+    arrayDoubleCrypt = True
+
+    #
+    # @var bool encrypt string array literals (array staging strategy)
+    #
+    arrayStringCrypt = True
 
     # 
     # @var integer success
@@ -123,14 +178,25 @@ class JObfuscator(object):
         self._apiKey = api_key
         
         self.enableCompression = enable_all_obfuscation_options
-        self.mixCodeFlow = enable_all_obfuscation_options
-        self.renameVariables = enable_all_obfuscation_options
-        self.renameMethods = enable_all_obfuscation_options
-        self.shuffleMethods = enable_all_obfuscation_options
+        self.removeComments = enable_all_obfuscation_options
         self.intsMathCrypt = enable_all_obfuscation_options
+        self.dblsMathCrypt = enable_all_obfuscation_options
         self.cryptStrings = enable_all_obfuscation_options
+        self.renameMethods = enable_all_obfuscation_options
+        self.renameVariables = enable_all_obfuscation_options
+        self.shuffleMethods = enable_all_obfuscation_options
+        self.mixCodeFlow = enable_all_obfuscation_options
         self.intsToArrays = enable_all_obfuscation_options
         self.dblsToArrays = enable_all_obfuscation_options
+        self.stringCharVault = enable_all_obfuscation_options
+        self.intsFromDoubleMath = enable_all_obfuscation_options
+        self.opaqueMixerChain = enable_all_obfuscation_options
+        self.complexifyBooleans = enable_all_obfuscation_options
+        self.tryFinallyNoise = enable_all_obfuscation_options
+        self.arrayIntCrypt = enable_all_obfuscation_options
+        self.arrayCharCrypt = enable_all_obfuscation_options
+        self.arrayDoubleCrypt = enable_all_obfuscation_options
+        self.arrayStringCrypt = enable_all_obfuscation_options
 
     def login(self):
         """Login to the service and get the information about the current license limits
@@ -187,24 +253,46 @@ class JObfuscator(object):
             params_array["key"] = self._apiKey
 
         #
-        # obfuscation strategies
+        # obfuscation strategies (keys match JavaObfuscator CLI / Web API)
         #
-        if self.mixCodeFlow:
-            params_array["mix_code_flow"] = "1"
-        if self.renameVariables:
-            params_array["rename_variables"] = "1"
-        if self.renameMethods:
-            params_array["rename_methods"] = "1"
-        if self.shuffleMethods:
-            params_array["shuffle_methods"] = "1"
+        if self.removeComments:
+            params_array["remove_comments"] = "1"
         if self.intsMathCrypt:
             params_array["ints_math_crypt"] = "1"
+        if self.dblsMathCrypt:
+            params_array["dbls_math_crypt"] = "1"
         if self.cryptStrings:
             params_array["crypt_strings"] = "1"
+        if self.renameMethods:
+            params_array["rename_methods"] = "1"
+        if self.renameVariables:
+            params_array["rename_variables"] = "1"
+        if self.shuffleMethods:
+            params_array["shuffle_methods"] = "1"
+        if self.mixCodeFlow:
+            params_array["mix_code_flow"] = "1"
         if self.intsToArrays:
             params_array["ints_to_arrays"] = "1"
         if self.dblsToArrays:
             params_array["dbls_to_arrays"] = "1"
+        if self.stringCharVault:
+            params_array["string_char_vault"] = "1"
+        if self.intsFromDoubleMath:
+            params_array["ints_from_double_math"] = "1"
+        if self.opaqueMixerChain:
+            params_array["opaque_mixer_chain"] = "1"
+        if self.complexifyBooleans:
+            params_array["complexify_booleans"] = "1"
+        if self.tryFinallyNoise:
+            params_array["try_finally_noise"] = "1"
+        if self.arrayIntCrypt:
+            params_array["array_int_crypt"] = "1"
+        if self.arrayCharCrypt:
+            params_array["array_char_crypt"] = "1"
+        if self.arrayDoubleCrypt:
+            params_array["array_double_crypt"] = "1"
+        if self.arrayStringCrypt:
+            params_array["array_string_crypt"] = "1"
 
         #
         # check if compression is enabled

@@ -6,7 +6,7 @@
 #
 # In this example we will obfuscate sample source with default options.
 #
-# Version        : v1.04
+# Version        : v1.0.5
 # Language       : Python
 # Author         : Bartosz Wójcik
 # Web page       : https://www.pelock.com
@@ -71,12 +71,22 @@ class Ideone
     // annotation alone)
     //
     //@Obfuscate(
+    //  array_int_crypt = true,
+    //  array_char_crypt = true,
+    //  array_double_crypt = true,
+    //  array_string_crypt = true,
     //  ints_math_crypt = true,
+    //  dbls_math_crypt = true,
     //  crypt_strings = true,
+    //  string_char_vault = true,
     //  rename_methods = false,
     //  rename_variables = true,
     //  shuffle_methods = true,
     //  mix_code_flow = true,
+    //  ints_from_double_math = true,
+    //  opaque_mixer_chain = true,
+    //  complexify_booleans = true,
+    //  try_finally_noise = true,
     //  ints_to_arrays = true,
     //  dbls_to_arrays = true
     // )

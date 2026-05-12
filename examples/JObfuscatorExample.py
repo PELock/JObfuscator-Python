@@ -6,7 +6,7 @@
 #
 # In this example we will obfuscate sample source with custom options.
 #
-# Version        : v1.04
+# Version        : v1.0.5
 # Language       : Python
 # Author         : Bartosz Wójcik
 # Web page       : https://www.pelock.com
@@ -41,19 +41,29 @@ myJObfuscator = JObfuscator("ABCD-ABCD-ABCD-ABCD")
 #
 
 #
-# should the source code be compressed (both input & compressed)
+# should the source code be compressed (both input & output)
 #
 myJObfuscator.enableCompression = True
 
 #
-# change linear code execution flow to non-linear version
+# strip comments during parsing (Web API flag; not controlled by @Obfuscate)
 #
-myJObfuscator.mixCodeFlow = True
+myJObfuscator.removeComments = True
 
 #
-# rename variable names to random string values
+# encrypt integers using java.lang.Math.* style transformations
 #
-myJObfuscator.renameVariables = True
+myJObfuscator.intsMathCrypt = True
+
+#
+# encrypt doubles using java.lang.Math.* style transformations
+#
+myJObfuscator.dblsMathCrypt = True
+
+#
+# encrypt strings using polymorphic encryption algorithms
+#
+myJObfuscator.cryptStrings = True
 
 #
 # rename method names to random string values
@@ -61,19 +71,19 @@ myJObfuscator.renameVariables = True
 myJObfuscator.renameMethods = True
 
 #
+# rename variable names to random string values
+#
+myJObfuscator.renameVariables = True
+
+#
 # shuffle order of methods in the output source
 #
 myJObfuscator.shuffleMethods = True
 
 #
-# encrypt integers using more than 15 floating point math functions from the java.lang.Math.* class
+# change linear code execution flow to non-linear version
 #
-myJObfuscator.intsMathCrypt = True
-
-#
-# encrypt strings using polymorphic encryption algorithms
-#
-myJObfuscator.cryptStrings = True
+myJObfuscator.mixCodeFlow = True
 
 #
 # for each method, extract all possible integers from the code and store them in an array
@@ -84,6 +94,39 @@ myJObfuscator.intsToArrays = True
 # for each method, extract all possible doubles from the code and store them in an array
 #
 myJObfuscator.dblsToArrays = True
+
+#
+# string char vault strategy
+#
+myJObfuscator.stringCharVault = True
+
+#
+# derive integers via double/math pipelines
+#
+myJObfuscator.intsFromDoubleMath = True
+
+#
+# opaque mixer chain strategy
+#
+myJObfuscator.opaqueMixerChain = True
+
+#
+# complexify boolean expressions
+#
+myJObfuscator.complexifyBooleans = True
+
+#
+# inject try/finally noise blocks
+#
+myJObfuscator.tryFinallyNoise = True
+
+#
+# encrypt int / char / double / string array literals
+#
+myJObfuscator.arrayIntCrypt = True
+myJObfuscator.arrayCharCrypt = True
+myJObfuscator.arrayDoubleCrypt = True
+myJObfuscator.arrayStringCrypt = True
 
 #
 # source code in Java format
@@ -128,12 +171,22 @@ class Ideone
     // annotation alone)
     //
     //@Obfuscate(
+    //  array_int_crypt = true,
+    //  array_char_crypt = true,
+    //  array_double_crypt = true,
+    //  array_string_crypt = true,
     //  ints_math_crypt = true,
+    //  dbls_math_crypt = true,
     //  crypt_strings = true,
+    //  string_char_vault = true,
     //  rename_methods = false,
     //  rename_variables = true,
     //  shuffle_methods = true,
     //  mix_code_flow = true,
+    //  ints_from_double_math = true,
+    //  opaque_mixer_chain = true,
+    //  complexify_booleans = true,
+    //  try_finally_noise = true,
     //  ints_to_arrays = true,
     //  dbls_to_arrays = true
     // )
